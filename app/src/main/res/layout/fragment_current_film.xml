@@ -1,139 +1,147 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    tools:context=".presentation.fragment.film.CurrentFilmFragment">
 
-    <ImageView
-        android:id="@+id/filmAvatar"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
-        android:layout_marginTop="@dimen/medium_space"
-        android:layout_marginStart="@dimen/medium_space"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:src="@drawable/ic_not_found_avatar_film" />
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
 
-    <TextView
-        android:id="@+id/titleFilm"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/medium_space"
-        android:layout_marginEnd="@dimen/medium_space"
-        android:ellipsize="end"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/filmAvatar"
-        app:layout_constraintTop_toTopOf="@+id/filmAvatar"
-        tools:text="@string/title_film" />
+        <ImageView
+            android:id="@+id/filmAvatar"
+            android:layout_width="130dp"
+            android:layout_height="130dp"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_marginTop="@dimen/medium_space"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@drawable/ic_not_found_avatar_film" />
 
-    <TextView
-        android:id="@+id/fieldDescription"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/low_space"
-        android:layout_marginEnd="@dimen/medium_space"
-        android:text="@string/field_description"
-        android:textSize="15sp"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/titleFilm"
-        app:layout_constraintTop_toBottomOf="@+id/titleFilm" />
+        <TextView
+            android:id="@+id/titleFilm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/medium_space"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:ellipsize="end"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@+id/filmAvatar"
+            app:layout_constraintTop_toTopOf="@+id/filmAvatar"
+            tools:text="@string/title_film" />
 
-    <TextView
-        android:id="@+id/descriptionFilm"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/low_space"
-        android:layout_marginEnd="@dimen/medium_space"
-        android:textSize="12sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/fieldDescription"
-        app:layout_constraintTop_toBottomOf="@+id/fieldDescription"
-        tools:text="@string/description_film" />
+        <TextView
+            android:id="@+id/fieldDescription"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/low_space"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:text="@string/field_description"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/titleFilm"
+            app:layout_constraintTop_toBottomOf="@+id/titleFilm" />
 
-    <TextView
-        android:id="@+id/ratingFilm"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/low_space"
-        app:layout_constraintEnd_toEndOf="@+id/filmAvatar"
-        app:layout_constraintStart_toStartOf="@+id/filmAvatar"
-        app:layout_constraintTop_toBottomOf="@+id/filmAvatar"
-        android:textStyle="bold"
-        tools:text="9.1/10" />
+        <TextView
+            android:id="@+id/descriptionFilm"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/low_space"
+            android:layout_marginEnd="@dimen/medium_space"
+            android:textSize="12sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/fieldDescription"
+            app:layout_constraintTop_toBottomOf="@+id/fieldDescription"
+            tools:text="@string/description_film" />
 
-    <TextView
-        android:id="@+id/fieldURating"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="15sp"
-        android:layout_marginTop="@dimen/medium_space"
-        android:text="@string/your_rating"
-        android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/filmAvatar"
-        app:layout_constraintTop_toBottomOf="@+id/ratingFilm"/>
+        <TextView
+            android:id="@+id/ratingFilm"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/low_space"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="@+id/filmAvatar"
+            app:layout_constraintStart_toStartOf="@+id/filmAvatar"
+            app:layout_constraintTop_toBottomOf="@+id/filmAvatar"
+            tools:text="9.1/10" />
 
-    <Spinner
-        android:id="@+id/ratingSpinner"
-        style="@style/DefaultSpinner"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="6dp"
-        app:layout_constraintStart_toStartOf="@+id/filmAvatar"
-        app:layout_constraintTop_toBottomOf="@+id/fieldURating"
-        app:layout_constraintEnd_toEndOf="@+id/filmAvatar"/>
+        <TextView
+            android:id="@+id/fieldURating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_space"
+            android:text="@string/your_rating"
+            android:textSize="15sp"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/filmAvatar"
+            app:layout_constraintTop_toBottomOf="@+id/ratingFilm" />
 
-    
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/reviewTextInput"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/medium_space"
-        app:layout_constraintStart_toStartOf="@+id/filmAvatar"
-        app:layout_constraintEnd_toEndOf="@+id/titleFilm"
-        app:layout_constraintTop_toBottomOf="@+id/descriptionFilm">
+        <Spinner
+            android:id="@+id/ratingSpinner"
+            style="@style/DefaultSpinner"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="6dp"
+            android:entries="@array/score_array"
+            app:layout_constraintEnd_toEndOf="@+id/filmAvatar"
+            app:layout_constraintStart_toStartOf="@+id/filmAvatar"
+            app:layout_constraintTop_toBottomOf="@+id/fieldURating" />
 
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/emailEditText"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:imeOptions="actionNext"
-            android:inputType="text"/>
 
-    </com.google.android.material.textfield.TextInputLayout>
+        <com.google.android.material.textfield.TextInputLayout
+            android:id="@+id/reviewTextInput"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_space"
+            android:hint="@string/your_review"
+            app:layout_constraintEnd_toEndOf="@+id/titleFilm"
+            app:layout_constraintStart_toStartOf="@+id/filmAvatar"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionFilm">
 
-    <Button
-        android:id="@+id/addReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="@dimen/low_space"
-        android:textSize="10sp"
-        android:text="@string/add_review"
-        app:layout_constraintStart_toStartOf="@+id/filmAvatar"
-        app:layout_constraintEnd_toEndOf="@+id/titleFilm"
-        app:layout_constraintTop_toBottomOf="@id/reviewTextInput"/>
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/reviewEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:imeOptions="actionDone"
+                android:inputType="text" />
 
-    <TextView
-        android:id="@+id/fieldReview"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/field_review"
-        android:layout_marginTop="@dimen/large_space"
-        android:textStyle="bold"
-        app:layout_constraintTop_toBottomOf="@+id/addReview"
-        app:layout_constraintStart_toStartOf="@+id/filmAvatar"
-        />
+        </com.google.android.material.textfield.TextInputLayout>
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginTop="@dimen/medium_space"
-        app:layout_constraintStart_toStartOf="@+id/fieldReview"
-        app:layout_constraintEnd_toEndOf="@+id/titleFilm"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fieldReview"/>
+        <Button
+            android:id="@+id/addReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/low_space"
+            android:text="@string/add_review"
+            android:textSize="10sp"
+            app:layout_constraintEnd_toEndOf="@+id/titleFilm"
+            app:layout_constraintStart_toStartOf="@+id/filmAvatar"
+            app:layout_constraintTop_toBottomOf="@id/reviewTextInput" />
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+        <TextView
+            android:id="@+id/fieldReview"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/large_space"
+            android:text="@string/field_review"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="@+id/filmAvatar"
+            app:layout_constraintTop_toBottomOf="@+id/addReview" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/reviewRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/medium_space"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="@+id/titleFilm"
+            app:layout_constraintStart_toStartOf="@+id/fieldReview"
+            app:layout_constraintTop_toBottomOf="@+id/fieldReview" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

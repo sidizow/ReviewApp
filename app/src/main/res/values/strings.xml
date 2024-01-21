@@ -16,4 +16,25 @@
     <string name="add_review">Добавить рецензию</string>
     <string name="your_rating">Ваша оценка:</string>
     <string name="reviewer_rating">Оценка пользователя: %1$s</string>
+    <string name="exit">Выход</string>
+    <string name="invalid_email_or_password_message">Неверный email или пароль</string>
+    <string name="field_is_empty">Пустое поле</string>
+    <string name="password_missmatch">Пароли не совпадают</string>
+    <string name="account_already_exists">Учетная запись уже существует</string>
+    <string name="success_sign_up_message">Учетная запись создана!</string>
+    <string name="your_review">Ваша рецензия</string>
+
+    <string-array name="score_array">
+        <item>0</item>
+        <item>1</item>
+        <item>2</item>
+        <item>3</item>
+        <item>4</item>
+        <item>5</item>
+        <item>6</item>
+        <item>7</item>
+        <item>8</item>
+        <item>9</item>
+        <item>10</item>
+    </string-array>
 </resources>

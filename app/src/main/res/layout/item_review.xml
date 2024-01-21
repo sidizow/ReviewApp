@@ -20,7 +20,7 @@
         android:id="@+id/reviewerRating"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="@string/reviewer_rating"
+        tools:text="@string/reviewer_rating"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="@+id/username"
         app:layout_constraintBottom_toBottomOf="@+id/username"/>
@@ -30,9 +30,9 @@
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="@dimen/low_space"
-        android:hint="@string/review_film"
+        tools:text="@string/review_film"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/username"
-        app:layout_constraintEnd_toEndOf="parent"/>
+        app:layout_constraintTop_toBottomOf="@+id/username" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

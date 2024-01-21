@@ -3,11 +3,16 @@
     <style name="Base.Theme.ReviewApp" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
+        <item name="textInputStyle">@style/GlobalTextInputStyle</item>
     </style>
 
     <style name="Theme.ReviewApp" parent="Base.Theme.ReviewApp" />
 
     <style name="DefaultSpinner" parent="Widget.AppCompat.DropDownItem.Spinner">
         <item name="android:textSize">100sp</item>
+    </style>
+
+    <style name="GlobalTextInputStyle" parent="Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+        <item name="android:minWidth">@dimen/large_width</item>
     </style>
 </resources>
