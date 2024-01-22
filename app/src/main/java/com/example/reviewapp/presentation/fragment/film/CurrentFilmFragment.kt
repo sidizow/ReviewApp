@@ -1,7 +1,6 @@
 package com.example.reviewapp.presentation.fragment.film
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
@@ -41,7 +40,7 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
         viewModel.listAccount.observe(viewLifecycleOwner) { adapter.setAccounts(it) }
 
         viewModel.listReviews.observe(viewLifecycleOwner) { adapter.renderReviews(it) }
-        Log.d("TAG", "create")
+
 
         selectRatingFilm()
         observeClearReviewEvent()
@@ -103,6 +102,11 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
         binding.titleFilm.text = film.title
         binding.descriptionFilm.text = film.description
         binding.ratingFilm.text = film.summaryScore.toString()
+        viewModel.rating.observe(viewLifecycleOwner){
+            if(it != null){
+                binding.ratingSpinner.setSelection(it)
+            }
+        }
         if (film.img.isNotBlank()) {
             Glide.with(binding.filmAvatar.context)
                 .load(film.img)

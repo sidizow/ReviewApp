@@ -27,7 +27,6 @@ class CatalogFilmsFragment : BaseFragment<FragmentCatalogFilmsBinding>(
         observeOpenFilmPageEvent()
     }
 
-
     private fun setupCatalog(): CatalogAdapter {
         binding.filmsRecyclerView.layoutManager = LinearLayoutManager(requireContext())
         val adapter = CatalogAdapter(viewModel)

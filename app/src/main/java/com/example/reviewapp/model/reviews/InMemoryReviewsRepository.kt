@@ -9,42 +9,42 @@ class InMemoryReviewsRepository @Inject constructor() : ReviewsRepository {
 
 
     private var reviews = mutableListOf(
-       /* Review(
-            idFilm = 1,
-            idAccount = 1,
-            rating = 10,
-            review = null
-        ),
-        Review(
-            idFilm = 1,
-            idAccount = 2,
-            rating = 8,
-            review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
-        ),
-        Review(
-            idFilm = 1,
-            idAccount = 2,
-            rating = 8,
-            review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
-        ),
-        Review(
-            idFilm = 1,
-            idAccount = 2,
-            rating = 8,
-            review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
-        ),
-        Review(
-            idFilm = 1,
-            idAccount = 2,
-            rating = 8,
-            review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
-        ),
-        Review(
-            idFilm = 1,
-            idAccount = 2,
-            rating = 8,
-            review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
-        ),*/
+        /* Review(
+             idFilm = 1,
+             idAccount = 1,
+             rating = 10,
+             review = null
+         ),
+         Review(
+             idFilm = 1,
+             idAccount = 2,
+             rating = 8,
+             review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
+         ),
+         Review(
+             idFilm = 1,
+             idAccount = 2,
+             rating = 8,
+             review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
+         ),
+         Review(
+             idFilm = 1,
+             idAccount = 2,
+             rating = 8,
+             review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
+         ),
+         Review(
+             idFilm = 1,
+             idAccount = 2,
+             rating = 8,
+             review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
+         ),
+         Review(
+             idFilm = 1,
+             idAccount = 2,
+             rating = 8,
+             review = "Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал"
+         ),*/
         Review(
             idFilm = 1,
             idAccount = 2,
@@ -61,18 +61,19 @@ class InMemoryReviewsRepository @Inject constructor() : ReviewsRepository {
     )
 
 
-    /*fun getReviewForCurrentAccount(idAccount: Long, idFilm: Long): Review? =
-       reviews.firstOrNull { it.idAccount == idAccount && it.idFilm == idFilm}*/
+     override suspend fun getReviewByIdFilmAndIdAccount(idFilm: Long, idAccount: Long) =
+        reviews.firstOrNull { it.idAccount == idAccount && it.idFilm == idFilm }
 
-    override suspend fun getReview(): List<Review> = reviews
+    override suspend fun getIndexReviewByIdFilmAndIdAccount(idFilm: Long, idAccount: Long): Int =
+        reviews.indexOf(getReviewByIdFilmAndIdAccount(idFilm, idAccount))
 
-    override suspend fun getIndexReviewByIdFilmAndIdAccount(idFilm: Long, idAccount: Long): Int {
-        val review = reviews.firstOrNull { it.idAccount == idAccount && it.idFilm == idFilm }
-        return reviews.indexOf(review)
+    override suspend fun getReviewByIdFilm(idFilm: Long): List<Review> {
+        val filterList = reviews.filter { it.idFilm == idFilm }
+        return filterList.map { it.copy() }
     }
 
-    override suspend fun getReviewByIdFilm(idFilm: Long): List<Review> =
-        reviews.filter { it.idFilm == idFilm }
+    override  suspend fun getRatingByIdFilmAndIdAccount(idFilm: Long, idAccount: Long): Int? =
+        getReviewByIdFilmAndIdAccount(idFilm,idAccount)?.rating
 
     override suspend fun selectRatingFilm(idAccount: Long, idFilm: Long, rating: Int) {
         val index = getIndexReviewByIdFilmAndIdAccount(idFilm, idAccount)
@@ -89,7 +90,6 @@ class InMemoryReviewsRepository @Inject constructor() : ReviewsRepository {
         } else {
             reviews[index].rating = rating
         }
-
     }
 
     override suspend fun addReviewForFilm(idAccount: Long, idFilm: Long, review: String) {

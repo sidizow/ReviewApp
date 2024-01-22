@@ -38,6 +38,9 @@ class CurrentFilmViewModel @Inject constructor(
     private val _listAccount = MutableLiveData<List<Account>>()
     val listAccount = _listAccount.share()
 
+    private val _rating = MutableLiveData<Int>()
+    val rating = _rating.share()
+
     private val _clearReviewEvent = MutableUnitLiveEvent()
     val clearReviewEvent = _clearReviewEvent.share()
 
@@ -45,10 +48,15 @@ class CurrentFilmViewModel @Inject constructor(
         viewModelScope.launch {
             _currentFilm.value = filmsRepository.getFilmById(idFilm)
             getAccountAndReviews()
+            accountsRepository.getAccount().collect {
+                if (it != null) {
+                    _rating.value = reviewsRepository.getRatingByIdFilmAndIdAccount(idFilm, it.id)
+                }
+            }
         }
     }
 
-    private fun getAccountAndReviews() = viewModelScope.launch{
+    private fun getAccountAndReviews() = viewModelScope.launch {
         _listAccount.value = accountsRepository.getListAccount()
         _listReviews.value = reviewsRepository.getReviewByIdFilm(idFilm)
     }
@@ -59,7 +67,6 @@ class CurrentFilmViewModel @Inject constructor(
                 reviewsRepository.selectRatingFilm(it.id, idFilm, rating)
                 getAccountAndReviews()
             }
-
         }
     }
 

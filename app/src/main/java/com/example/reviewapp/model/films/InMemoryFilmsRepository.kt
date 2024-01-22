@@ -27,9 +27,11 @@ class InMemoryFilmsRepository @Inject constructor() : FilmsRepository {
     )
 
 
-    override suspend fun getListFilms(): List<Film> = films
+    override suspend fun getListFilms(): List<Film> = films.map { it.copy() }
 
     override suspend fun getFilmById(idFilm: Long) = films.firstOrNull { it.id == idFilm }
+
+
     companion object{
         private val IMAGES = mutableListOf(
             "https://avatars.mds.yandex.net/get-kinopoisk-image/1946459/acb932eb-c7d0-42de-92df-f5f306c4c48e/1920x",
