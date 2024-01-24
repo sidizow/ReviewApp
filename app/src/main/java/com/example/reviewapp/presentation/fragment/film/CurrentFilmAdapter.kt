@@ -24,27 +24,26 @@ class CurrentFilmAdapter : RecyclerView.Adapter<CurrentFilmAdapter.ReviewViewHol
 
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
         val review = currentReviews[position]
-
         with(holder.binding) {
-            if (!review.review.isNullOrBlank()) {
-                username.text = getUsernameById(review.idAccount)
-                reviewerRating.text = reviewerRating.context.getString(
-                    R.string.reviewer_rating,
-                    review.rating?.toString() ?: "Нет оценки"
-                )
-                reviewerReview.text = review.review
-            }
+            username.text = getUsernameById(review.idAccount)
+            reviewerRating.text = reviewerRating.context.getString(
+                R.string.reviewer_rating,
+                review.rating?.toString() ?: "Нет оценки"
+            )
+            reviewerReview.text = review.review
+
         }
     }
 
     override fun getItemCount(): Int = currentReviews.size
 
-    fun setAccounts(accounts: List<Account>){
+    fun setAccounts(accounts: List<Account>) {
         this.accounts = accounts
     }
 
     fun renderReviews(reviews: List<Review>) {
-        val diffResult = DiffUtil.calculateDiff(CurrentFilmDiffCallback(this.currentReviews, reviews))
+        val diffResult =
+            DiffUtil.calculateDiff(CurrentFilmDiffCallback(this.currentReviews, reviews))
         this.currentReviews = reviews
         diffResult.dispatchUpdatesTo(this)
     }

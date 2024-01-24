@@ -65,7 +65,7 @@ class SQLiteReviewsRepository @Inject constructor(
             while (cursor.moveToNext()) {
                 list.add(parseReview(cursor))
             }
-            return@use list
+            return@use list.filter { it.review != null }
         }
     }
 
