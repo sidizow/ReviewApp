@@ -21,6 +21,7 @@ class MainActivity : AppCompatActivity() {
         val binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         setSupportActionBar(binding.toolbar)
 
+
         val navController = getNavController()
         viewModel.launchMainScreenEvent.observeEvent(this){
             prepareRootNavController(it, navController)

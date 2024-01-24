@@ -41,7 +41,7 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
 
         viewModel.listReviews.observe(viewLifecycleOwner) { adapter.renderReviews(it) }
 
-
+        observeState()
         selectRatingFilm()
         observeClearReviewEvent()
     }
@@ -51,6 +51,12 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
         val adapter = CurrentFilmAdapter()
         binding.reviewRecyclerView.adapter = adapter
         return adapter
+    }
+
+    private fun observeState() = viewModel.state.observe(viewLifecycleOwner) {
+        binding.reviewTextInput.error =
+            if (it.emptyReviewError) getString(R.string.field_is_empty) else null
+
     }
 
     private fun selectRatingFilm() {
@@ -72,11 +78,10 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
     }
 
     private fun addReviewForFilm() {
-        val review = binding.reviewEditText.text?.toString()
-        if (!review.isNullOrBlank()) {
-            viewModel.addReviewForFilm(review)
-            binding.reviewEditText.clearFocus()
-        }
+        viewModel.addReviewForFilm(
+            review = binding.reviewEditText.text.toString()
+        )
+        binding.reviewEditText.clearFocus()
     }
 
     private fun observeClearReviewEvent() =
@@ -102,8 +107,8 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
         binding.titleFilm.text = film.title
         binding.descriptionFilm.text = film.description
         binding.ratingFilm.text = film.summaryScore.toString()
-        viewModel.rating.observe(viewLifecycleOwner){
-            if(it != null){
+        viewModel.rating.observe(viewLifecycleOwner) {
+            if (it != null) {
                 binding.ratingSpinner.setSelection(it)
             }
         }

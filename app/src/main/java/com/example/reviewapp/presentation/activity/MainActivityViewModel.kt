@@ -38,7 +38,7 @@ class MainActivityViewModel @Inject constructor(
         }
     }
 
-    fun logout() {
+    fun logout() = viewModelScope.launch {
         accountsRepository.logout()
         restartAppFromLoginScreen()
     }

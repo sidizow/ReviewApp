@@ -13,9 +13,9 @@ interface AccountsRepository {
 
     suspend fun getListAccount(): List<Account>
 
-    fun logout()
+    suspend fun logout()
 
-    fun getAccount(): Flow<Account?>
+    suspend fun getAccount(): Flow<Account?>
 
 
 }

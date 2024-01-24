@@ -4,10 +4,7 @@ import com.example.reviewapp.model.reviews.entities.Review
 
 interface ReviewsRepository {
 
-
     suspend fun getReviewByIdFilmAndIdAccount(idFilm: Long, idAccount: Long): Review?
-
-    suspend fun getIndexReviewByIdFilmAndIdAccount(idFilm: Long, idAccount: Long): Int
 
     suspend fun getRatingByIdFilmAndIdAccount(idFilm: Long, idAccount: Long): Int?
 

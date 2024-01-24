@@ -3,6 +3,8 @@ package com.example.reviewapp.presentation.fragment.film
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.viewModelScope
+import com.example.reviewapp.model.EmptyFieldException
+import com.example.reviewapp.model.Field
 import com.example.reviewapp.model.accounts.AccountsRepository
 import com.example.reviewapp.model.accounts.entities.Account
 import com.example.reviewapp.model.films.FilmsRepository
@@ -12,6 +14,7 @@ import com.example.reviewapp.model.reviews.entities.Review
 import com.example.reviewapp.presentation.base.BaseViewModel
 import com.example.reviewapp.utils.MutableUnitLiveEvent
 import com.example.reviewapp.utils.publishEvent
+import com.example.reviewapp.utils.requireValue
 import com.example.reviewapp.utils.share
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -28,6 +31,9 @@ class CurrentFilmViewModel @Inject constructor(
     private val navArgs = CurrentFilmFragmentArgs
         .fromSavedStateHandle(savedStateHandle)
     private val idFilm = navArgs.idFilm
+
+    private val _state = MutableLiveData(State())
+    val state = _state.share()
 
     private val _currentFilm = MutableLiveData<Film>()
     val currentFilm = _currentFilm.share()
@@ -73,15 +79,27 @@ class CurrentFilmViewModel @Inject constructor(
     fun addReviewForFilm(review: String) = viewModelScope.launch {
         accountsRepository.getAccount().collect {
             if (it != null) {
-                reviewsRepository.addReviewForFilm(it.id, idFilm, review)
-                clearReviewField()
-                getAccountAndReviews()
+                try {
+                    reviewsRepository.addReviewForFilm(it.id, idFilm, review)
+                    clearReviewField()
+                    getAccountAndReviews()
+                }catch (e: EmptyFieldException){
+                    processEmptyFieldException(e)
+                }
             }
         }
+    }
+
+    private fun processEmptyFieldException(e: EmptyFieldException) {
+        _state.value = _state.requireValue().copy(
+            emptyReviewError = e.field == Field.Review
+        )
     }
 
 
     private fun clearReviewField() = _clearReviewEvent.publishEvent()
 
-
+    data class State(
+        val emptyReviewError: Boolean = false
+    )
 }
