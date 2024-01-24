@@ -14,4 +14,6 @@ interface ReviewsRepository {
 
     suspend fun addReviewForFilm(idAccount: Long, idFilm: Long, review: String)
 
+    suspend fun calculateAverage(idFilm: Long): Double
+
 }

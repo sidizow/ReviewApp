@@ -47,12 +47,16 @@ class CurrentFilmViewModel @Inject constructor(
     private val _rating = MutableLiveData<Int>()
     val rating = _rating.share()
 
+    private val _summaryScore = MutableLiveData<Double>()
+    val summaryScore = _summaryScore.share()
+
     private val _clearReviewEvent = MutableUnitLiveEvent()
     val clearReviewEvent = _clearReviewEvent.share()
 
     init {
         viewModelScope.launch {
             _currentFilm.value = filmsRepository.getFilmById(idFilm)
+            updateSummaryScore(idFilm)
             getAccountAndReviews()
             accountsRepository.getAccount().collect {
                 if (it != null) {
@@ -62,16 +66,13 @@ class CurrentFilmViewModel @Inject constructor(
         }
     }
 
-    private fun getAccountAndReviews() = viewModelScope.launch {
-        _listAccount.value = accountsRepository.getListAccount()
-        _listReviews.value = reviewsRepository.getReviewByIdFilm(idFilm)
-    }
-
     fun selectRatingFilm(rating: Int) = viewModelScope.launch {
         accountsRepository.getAccount().collect {
             if (it != null) {
                 reviewsRepository.selectRatingFilm(it.id, idFilm, rating)
                 getAccountAndReviews()
+                filmsRepository.updateAVG(idFilm, reviewsRepository.calculateAverage(idFilm))
+                updateSummaryScore(idFilm)
             }
         }
     }
@@ -90,13 +91,20 @@ class CurrentFilmViewModel @Inject constructor(
         }
     }
 
+    private fun getAccountAndReviews() = viewModelScope.launch {
+        _listAccount.value = accountsRepository.getListAccount()
+        _listReviews.value = reviewsRepository.getReviewByIdFilm(idFilm)
+    }
+
+    private suspend fun updateSummaryScore(idFilm: Long){
+        _summaryScore.value = filmsRepository.getSummaryScoreByIdFilm(idFilm)
+    }
+
     private fun processEmptyFieldException(e: EmptyFieldException) {
         _state.value = _state.requireValue().copy(
             emptyReviewError = e.field == Field.Review
         )
     }
-
-
     private fun clearReviewField() = _clearReviewEvent.publishEvent()
 
     data class State(

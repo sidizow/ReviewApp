@@ -69,7 +69,6 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
                     viewModel.selectRatingFilm(selectRating)
                 }
             }
-
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
@@ -94,7 +93,6 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
                     addReviewForFilm()
                     true
                 }
-
                 else -> false
             }
         }
@@ -103,7 +101,9 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
     private fun renderFilm(film: Film) {
         binding.titleFilm.text = film.title
         binding.descriptionFilm.text = film.description
-        binding.ratingFilm.text = film.summaryScore.toString()
+        viewModel.summaryScore.observe(viewLifecycleOwner){
+            binding.ratingFilm.text = it.toString()
+        }
         viewModel.rating.observe(viewLifecycleOwner) {
             if (it != null) {
                 binding.ratingSpinner.setSelection(it)
@@ -119,5 +119,4 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
             binding.filmAvatar.setImageResource(R.drawable.ic_not_found_avatar_film)
         }
     }
-
 }

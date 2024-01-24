@@ -47,7 +47,7 @@ class SQLiteReviewsRepository @Inject constructor(
         }
 
 
-    override suspend fun getReviewByIdFilm(idFilm: Long): List<Review> = withContext(ioDispatcher){
+    override suspend fun getReviewByIdFilm(idFilm: Long): List<Review> = withContext(ioDispatcher) {
         val cursor = db.query(
             AccountsFilmsReviewsTable.TABLE_NAME,
             arrayOf(
@@ -69,20 +69,34 @@ class SQLiteReviewsRepository @Inject constructor(
         }
     }
 
-    override suspend fun selectRatingFilm(idAccount: Long, idFilm: Long, rating: Int) = withContext(ioDispatcher) {
-        if (getReviewByIdFilmAndIdAccount(idFilm, idAccount) == null) {
-            addRating(idAccount, idFilm, rating)
-        } else updateRating(idAccount, idFilm, rating)
-    }
+    override suspend fun selectRatingFilm(idAccount: Long, idFilm: Long, rating: Int) =
+        withContext(ioDispatcher) {
+            if (getReviewByIdFilmAndIdAccount(idFilm, idAccount) == null) {
+                addRating(idAccount, idFilm, rating)
+            } else updateRating(idAccount, idFilm, rating)
+        }
 
-    override suspend fun addReviewForFilm(idAccount: Long, idFilm: Long, review: String) = wrapSQLiteException(ioDispatcher){
-        if (review.isEmpty()) throw EmptyFieldException(Field.Review)
+    override suspend fun addReviewForFilm(idAccount: Long, idFilm: Long, review: String) =
+        wrapSQLiteException(ioDispatcher) {
+            if (review.isEmpty()) throw EmptyFieldException(Field.Review)
 
-        if (getReviewByIdFilmAndIdAccount(idFilm, idAccount) == null) {
-            addReview(idAccount, idFilm, review)
-        } else updateReview(idAccount, idFilm, review)
+            if (getReviewByIdFilmAndIdAccount(idFilm, idAccount) == null) {
+                addReview(idAccount, idFilm, review)
+            } else updateReview(idAccount, idFilm, review)
 
-        return@wrapSQLiteException
+            return@wrapSQLiteException
+        }
+
+    override suspend fun calculateAverage(idFilm: Long): Double = withContext(ioDispatcher){
+        val cursor = db.rawQuery(
+            "SELECT AVG(${AccountsFilmsReviewsTable.COLUMN_RATING}) FROM ${AccountsFilmsReviewsTable.TABLE_NAME} " +
+                    "WHERE ${AccountsFilmsReviewsTable.COLUMN_FILM_ID} = $idFilm",
+            null
+        )
+        return@withContext cursor.use {
+            cursor.moveToFirst()
+            return@use cursor.getDouble(0)
+        }
     }
 
     private fun addReview(idAccount: Long, idFilm: Long, review: String) {
@@ -130,6 +144,7 @@ class SQLiteReviewsRepository @Inject constructor(
             arrayOf(idAccount.toString(), idFilm.toString())
         )
     }
+
 
     private fun parseReview(cursor: Cursor): Review {
         return Review(

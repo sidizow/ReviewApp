@@ -1,5 +1,6 @@
 package com.example.reviewapp.presentation.fragment.catalog
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -54,6 +55,7 @@ class CatalogAdapter(
     }
 
     fun renderFilms(films: List<Film>) {
+        Log.d("TAG", "old list: ${this.films.toString()} new list: $films")
         val diffResult = DiffUtil.calculateDiff(CatalogFilmsDiffCallback(this.films, films))
         this.films = films
         diffResult.dispatchUpdatesTo(this)
