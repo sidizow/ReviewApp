@@ -1,6 +1,5 @@
 package com.example.reviewapp.presentation.fragment.catalog
 
-import android.util.Log
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.example.reviewapp.model.films.FilmsRepository
@@ -30,11 +29,6 @@ class CatalogFilmsViewModel @Inject constructor(
                 _listFilms.value = it
             }
         }
-    }
-
-    private suspend fun getFilms(){
-        _listFilms.value = filmsRepository.getListFilms()
-        Log.d("TAG", "Launch: " + filmsRepository.getListFilms().toString())
     }
 
     override fun onOpenFilmPage(idFilm: Long) {
