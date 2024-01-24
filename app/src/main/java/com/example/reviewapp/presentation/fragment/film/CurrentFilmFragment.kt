@@ -6,7 +6,6 @@ import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.EditText
 import androidx.fragment.app.viewModels
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.reviewapp.R
@@ -23,8 +22,6 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
 ) {
 
     override val viewModel by viewModels<CurrentFilmViewModel>()
-
-    private val args by navArgs<CurrentFilmFragmentArgs>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -122,7 +119,5 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
             binding.filmAvatar.setImageResource(R.drawable.ic_not_found_avatar_film)
         }
     }
-
-    private fun getIdFilmArgument() = args.idFilm
 
 }
