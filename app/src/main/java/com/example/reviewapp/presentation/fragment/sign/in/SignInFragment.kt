@@ -73,10 +73,7 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
 
     private fun onSignUpButtonPressed() {
         val email = binding.emailEditText.text.toString()
-        val emailArg = if (email.isBlank())
-            null
-        else
-            email
+        val emailArg = email.ifBlank { null }
         val direction = SignInFragmentDirections.actionSignInFragmentToSignUpFragment(emailArg)
         findNavController().navigate(direction)
     }

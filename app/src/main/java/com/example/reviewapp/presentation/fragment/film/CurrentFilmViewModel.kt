@@ -30,7 +30,7 @@ class CurrentFilmViewModel @Inject constructor(
 
     private val navArgs = CurrentFilmFragmentArgs
         .fromSavedStateHandle(savedStateHandle)
-    private val idFilm = navArgs.idFilm
+    private val filmId = navArgs.filmId
 
     private val _state = MutableLiveData(State())
     val state = _state.share()
@@ -55,12 +55,13 @@ class CurrentFilmViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _currentFilm.value = filmsRepository.getFilmById(idFilm)
-            updateSummaryScore(idFilm)
-            getAccountAndReviews()
+            _currentFilm.value = filmsRepository.getFilmById(filmId)
+            _listAccount.value = accountsRepository.getListAccount()
+            updateSummaryScore(filmId)
+            getReviews()
             accountsRepository.getAccount().collect {
                 if (it != null) {
-                    _rating.value = reviewsRepository.getRatingByIdFilmAndIdAccount(idFilm, it.id)
+                    _rating.value = reviewsRepository.getRatingByAccountIdAndFilmId(it.id, filmId)
                 }
             }
         }
@@ -69,10 +70,10 @@ class CurrentFilmViewModel @Inject constructor(
     fun selectRatingFilm(rating: Int) = viewModelScope.launch {
         accountsRepository.getAccount().collect {
             if (it != null) {
-                reviewsRepository.selectRatingFilm(it.id, idFilm, rating)
-                getAccountAndReviews()
-                filmsRepository.updateAVG(idFilm, reviewsRepository.calculateAverage(idFilm))
-                updateSummaryScore(idFilm)
+                reviewsRepository.selectRatingFilm(it.id, filmId, rating)
+                getReviews()
+                filmsRepository.updateAvg(filmId, reviewsRepository.calculateAverage(filmId))
+                updateSummaryScore(filmId)
             }
         }
     }
@@ -81,9 +82,9 @@ class CurrentFilmViewModel @Inject constructor(
         accountsRepository.getAccount().collect {
             if (it != null) {
                 try {
-                    reviewsRepository.addReviewForFilm(it.id, idFilm, review)
+                    reviewsRepository.addReviewForFilm(it.id, filmId, review)
                     clearReviewField()
-                    getAccountAndReviews()
+                    getReviews()
                 }catch (e: EmptyFieldException){
                     processEmptyFieldException(e)
                 }
@@ -91,13 +92,12 @@ class CurrentFilmViewModel @Inject constructor(
         }
     }
 
-    private fun getAccountAndReviews() = viewModelScope.launch {
-        _listAccount.value = accountsRepository.getListAccount()
-        _listReviews.value = reviewsRepository.getReviewByIdFilm(idFilm)
+    private fun getReviews() = viewModelScope.launch {
+        _listReviews.value = reviewsRepository.getReviewsByFilmId(filmId)
     }
 
-    private suspend fun updateSummaryScore(idFilm: Long){
-        _summaryScore.value = filmsRepository.getSummaryScoreByIdFilm(idFilm)
+    private suspend fun updateSummaryScore(filmId: Long){
+        _summaryScore.value = filmsRepository.getSummaryScoreByFilmId(filmId)
     }
 
     private fun processEmptyFieldException(e: EmptyFieldException) {

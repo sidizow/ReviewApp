@@ -31,8 +31,8 @@ class CatalogFilmsViewModel @Inject constructor(
         }
     }
 
-    override fun onOpenFilmPage(idFilm: Long) {
-        _openFilmPageEvent.publishEvent(idFilm)
+    override fun onOpenFilmPage(filmId: Long) {
+        _openFilmPageEvent.publishEvent(filmId)
     }
 
 }

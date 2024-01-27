@@ -45,7 +45,7 @@
         android:label="fragment_current_film"
         tools:layout="@layout/fragment_current_film" >
         <argument
-            android:name="idFilm"
+            android:name="filmId"
             app:argType="long" />
     </fragment>
 </navigation>

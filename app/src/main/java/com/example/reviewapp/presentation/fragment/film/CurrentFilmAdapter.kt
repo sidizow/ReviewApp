@@ -25,7 +25,7 @@ class CurrentFilmAdapter : RecyclerView.Adapter<CurrentFilmAdapter.ReviewViewHol
     override fun onBindViewHolder(holder: ReviewViewHolder, position: Int) {
         val review = currentReviews[position]
         with(holder.binding) {
-            username.text = getUsernameById(review.idAccount)
+            username.text = getUsernameById(review.accountId)
             reviewerRating.text = reviewerRating.context.getString(
                 R.string.reviewer_rating,
                 review.rating?.toString() ?: "Нет оценки"

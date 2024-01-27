@@ -2,18 +2,19 @@ package com.example.reviewapp.model.reviews
 
 import com.example.reviewapp.model.reviews.entities.Review
 
+//TODO обработать все null
 interface ReviewsRepository {
 
-    suspend fun getReviewByIdFilmAndIdAccount(idFilm: Long, idAccount: Long): Review?
+    suspend fun getReviewByAccountIdAndFilmId(accountId: Long, filmId: Long): Review?
 
-    suspend fun getRatingByIdFilmAndIdAccount(idFilm: Long, idAccount: Long): Int?
+    suspend fun getRatingByAccountIdAndFilmId(accountId: Long, filmId: Long): Int?
 
-    suspend fun getReviewByIdFilm(idFilm: Long): List<Review>
+    suspend fun getReviewsByFilmId(filmId: Long): List<Review>
 
-    suspend fun selectRatingFilm(idAccount: Long, idFilm: Long, rating: Int)
+    suspend fun selectRatingFilm(accountId: Long, filmId: Long, rating: Int)
 
-    suspend fun addReviewForFilm(idAccount: Long, idFilm: Long, review: String)
+    suspend fun addReviewForFilm(accountId: Long, filmId: Long, review: String)
 
-    suspend fun calculateAverage(idFilm: Long): Double
+    suspend fun calculateAverage(filmId: Long): Double
 
 }

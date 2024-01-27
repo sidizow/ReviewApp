@@ -36,9 +36,9 @@ class CatalogFilmsFragment : BaseFragment<FragmentCatalogFilmsBinding>(
 
     private fun observeOpenFilmPageEvent() {
         viewModel.openFilmPageEvent.observe(viewLifecycleOwner) {
-            val idFilmArgs = it.get()
-            if(idFilmArgs != null){
-                val direction = CatalogFilmsFragmentDirections.actionCatalogFilmsFragmentToCurrentFilmFragment(idFilmArgs)
+            val filmIdArgs = it.get()
+            if(filmIdArgs != null){
+                val direction = CatalogFilmsFragmentDirections.actionCatalogFilmsFragmentToCurrentFilmFragment(filmIdArgs)
                 findNavController().navigate(direction)
             }
         }
