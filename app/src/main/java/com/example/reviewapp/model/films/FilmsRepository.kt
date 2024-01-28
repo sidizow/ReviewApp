@@ -5,13 +5,10 @@ import kotlinx.coroutines.flow.Flow
 
 interface FilmsRepository {
 
-    suspend fun getFlowFilms(): Flow<List<Film>>
+    suspend fun getListFilms(): Flow<List<Film>>
 
-    suspend fun getListFilms(): List<Film>
-
-    suspend fun getFilmById(filmId: Long): Film?
+    suspend fun getFilmById(filmId: Long): Flow<Film?>
 
     suspend fun updateAvg(filmId: Long, summaryScore: Double)
 
-    suspend fun getSummaryScoreByFilmId(filmId: Long): Double?
 }

@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Room
 import com.example.reviewapp.model.accounts.room.AccountsDao
 import com.example.reviewapp.model.films.room.FilmsDao
-import com.example.reviewapp.model.reviews.ReviewsDao
+import com.example.reviewapp.model.reviews.room.ReviewsDao
 import com.example.reviewapp.model.room.AppDatabase
 import dagger.Module
 import dagger.Provides

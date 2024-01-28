@@ -1,4 +1,4 @@
-package com.example.reviewapp.model.reviews
+package com.example.reviewapp.model.reviews.room
 
 import androidx.room.Dao
 import androidx.room.Insert
@@ -7,9 +7,9 @@ import androidx.room.Update
 import com.example.reviewapp.model.reviews.room.entities.RatingUpdateTuple
 import com.example.reviewapp.model.reviews.room.entities.ReviewDbEntity
 import com.example.reviewapp.model.reviews.room.entities.ReviewUpdateTuple
+import kotlinx.coroutines.flow.Flow
 
 
-//TODO поменять на флоу получение листа
 @Dao
 interface ReviewsDao {
 
@@ -17,7 +17,7 @@ interface ReviewsDao {
     fun getReviewByFilmIdAndAccountId(accountId: Long, filmId: Long): ReviewDbEntity?
 
     @Query("SELECT * FROM accounts_films_reviews WHERE film_id = :filmId")
-    fun getReviewsByFilmId(filmId: Long): List<ReviewDbEntity>
+    fun getReviewsByFilmId(filmId: Long): Flow<List<ReviewDbEntity>>
 
     @Insert
     fun addReview(reviewDbEntity: ReviewDbEntity)

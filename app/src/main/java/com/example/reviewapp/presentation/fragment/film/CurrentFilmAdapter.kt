@@ -38,14 +38,14 @@ class CurrentFilmAdapter : RecyclerView.Adapter<CurrentFilmAdapter.ReviewViewHol
     override fun getItemCount(): Int = currentReviews.size
 
     fun setAccounts(accounts: List<Account>) {
-        this.accounts = accounts
+            this.accounts = accounts
     }
 
     fun renderReviews(reviews: List<Review>) {
-        val diffResult =
-            DiffUtil.calculateDiff(CurrentFilmDiffCallback(this.currentReviews, reviews))
-        this.currentReviews = reviews
-        diffResult.dispatchUpdatesTo(this)
+            val diffResult =
+                DiffUtil.calculateDiff(CurrentFilmDiffCallback(this.currentReviews, reviews))
+            this.currentReviews = reviews
+            diffResult.dispatchUpdatesTo(this)
     }
 
     private fun getUsernameById(id: Long): String = accounts.first { it.id == id }.username

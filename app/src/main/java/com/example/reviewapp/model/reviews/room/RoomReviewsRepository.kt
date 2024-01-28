@@ -2,7 +2,6 @@ package com.example.reviewapp.model.reviews.room
 
 import com.example.reviewapp.model.EmptyFieldException
 import com.example.reviewapp.model.Field
-import com.example.reviewapp.model.reviews.ReviewsDao
 import com.example.reviewapp.model.reviews.ReviewsRepository
 import com.example.reviewapp.model.reviews.entities.Review
 import com.example.reviewapp.model.reviews.room.entities.RatingUpdateTuple
@@ -10,6 +9,8 @@ import com.example.reviewapp.model.reviews.room.entities.ReviewDbEntity
 import com.example.reviewapp.model.reviews.room.entities.ReviewUpdateTuple
 import com.example.reviewapp.model.room.wrapSQLiteException
 import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
@@ -24,17 +25,13 @@ class RoomReviewsRepository @Inject constructor(
         return reviewsDao.getReviewByFilmIdAndAccountId(accountId, filmId)?.toReview()
     }
 
-    override suspend fun getRatingByAccountIdAndFilmId(accountId: Long, filmId: Long): Int? =
-        withContext(ioDispatcher) {
-            return@withContext getReviewByAccountIdAndFilmId(accountId, filmId)?.rating
-        }
 
-
-    //TODO обновление ревью
-    override suspend fun getReviewsByFilmId(filmId: Long): List<Review> =
+    override suspend fun getReviewsByFilmId(filmId: Long): Flow<List<Review>> =
         withContext(ioDispatcher) {
-            return@withContext reviewsDao.getReviewsByFilmId(filmId).map { it.toReview() }
-                .filter { it.review != null }
+            return@withContext reviewsDao.getReviewsByFilmId(filmId)
+                .map { reviewDbEntity ->
+                    reviewDbEntity.map { it.toReview() }
+                }
         }
 
     override suspend fun selectRatingFilm(accountId: Long, filmId: Long, rating: Int) =
@@ -51,7 +48,6 @@ class RoomReviewsRepository @Inject constructor(
             if (getReviewByAccountIdAndFilmId(accountId, filmId) == null) {
                 addReview(accountId, filmId, review)
             } else updateReview(accountId, filmId, review)
-
             return@wrapSQLiteException
         }
 

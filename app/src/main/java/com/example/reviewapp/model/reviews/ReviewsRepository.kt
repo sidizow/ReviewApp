@@ -1,15 +1,13 @@
 package com.example.reviewapp.model.reviews
 
 import com.example.reviewapp.model.reviews.entities.Review
+import kotlinx.coroutines.flow.Flow
 
-//TODO обработать все null
 interface ReviewsRepository {
 
     suspend fun getReviewByAccountIdAndFilmId(accountId: Long, filmId: Long): Review?
 
-    suspend fun getRatingByAccountIdAndFilmId(accountId: Long, filmId: Long): Int?
-
-    suspend fun getReviewsByFilmId(filmId: Long): List<Review>
+    suspend fun getReviewsByFilmId(filmId: Long): Flow<List<Review>>
 
     suspend fun selectRatingFilm(accountId: Long, filmId: Long, rating: Int)
 

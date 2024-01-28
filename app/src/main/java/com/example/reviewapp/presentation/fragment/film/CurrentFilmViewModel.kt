@@ -17,6 +17,8 @@ import com.example.reviewapp.utils.publishEvent
 import com.example.reviewapp.utils.requireValue
 import com.example.reviewapp.utils.share
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.flow.Flow
+import kotlinx.coroutines.flow.combine
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -32,6 +34,8 @@ class CurrentFilmViewModel @Inject constructor(
         .fromSavedStateHandle(savedStateHandle)
     private val filmId = navArgs.filmId
 
+    lateinit var rating: Flow<Review?>
+
     private val _state = MutableLiveData(State())
     val state = _state.share()
 
@@ -44,60 +48,51 @@ class CurrentFilmViewModel @Inject constructor(
     private val _listAccount = MutableLiveData<List<Account>>()
     val listAccount = _listAccount.share()
 
-    private val _rating = MutableLiveData<Int>()
-    val rating = _rating.share()
-
-    private val _summaryScore = MutableLiveData<Double>()
-    val summaryScore = _summaryScore.share()
-
     private val _clearReviewEvent = MutableUnitLiveEvent()
     val clearReviewEvent = _clearReviewEvent.share()
 
     init {
         viewModelScope.launch {
-            _currentFilm.value = filmsRepository.getFilmById(filmId)
             _listAccount.value = accountsRepository.getListAccount()
-            updateSummaryScore(filmId)
-            getReviews()
-            accountsRepository.getAccount().collect {
-                if (it != null) {
-                    _rating.value = reviewsRepository.getRatingByAccountIdAndFilmId(it.id, filmId)
-                }
+
+            rating = combine(
+                accountsRepository.getAccount(),
+                reviewsRepository.getReviewsByFilmId(filmId)
+            ) { account, reviews ->
+                reviews.firstOrNull { it.accountId == account?.id }
+            }
+
+            filmsRepository.getFilmById(filmId).collect {
+                _currentFilm.value = it
+            }
+        }
+        viewModelScope.launch {
+            reviewsRepository.getReviewsByFilmId(filmId).collect { listReviews ->
+                    _listReviews.value = listReviews.filter { it.review != null }
             }
         }
     }
 
     fun selectRatingFilm(rating: Int) = viewModelScope.launch {
-        accountsRepository.getAccount().collect {
-            if (it != null) {
-                reviewsRepository.selectRatingFilm(it.id, filmId, rating)
-                getReviews()
+        accountsRepository.getAccount().collect { account ->
+            if (account != null) {
+                reviewsRepository.selectRatingFilm(account.id, filmId, rating)
                 filmsRepository.updateAvg(filmId, reviewsRepository.calculateAverage(filmId))
-                updateSummaryScore(filmId)
             }
         }
     }
 
     fun addReviewForFilm(review: String) = viewModelScope.launch {
-        accountsRepository.getAccount().collect {
-            if (it != null) {
-                try {
-                    reviewsRepository.addReviewForFilm(it.id, filmId, review)
+        try {
+            accountsRepository.getAccount().collect { account ->
+                if (account != null) {
+                    reviewsRepository.addReviewForFilm(account.id, filmId, review)
                     clearReviewField()
-                    getReviews()
-                }catch (e: EmptyFieldException){
-                    processEmptyFieldException(e)
                 }
             }
+        } catch (e: EmptyFieldException) {
+            processEmptyFieldException(e)
         }
-    }
-
-    private fun getReviews() = viewModelScope.launch {
-        _listReviews.value = reviewsRepository.getReviewsByFilmId(filmId)
-    }
-
-    private suspend fun updateSummaryScore(filmId: Long){
-        _summaryScore.value = filmsRepository.getSummaryScoreByFilmId(filmId)
     }
 
     private fun processEmptyFieldException(e: EmptyFieldException) {
@@ -105,6 +100,7 @@ class CurrentFilmViewModel @Inject constructor(
             emptyReviewError = e.field == Field.Review
         )
     }
+
     private fun clearReviewField() = _clearReviewEvent.publishEvent()
 
     data class State(

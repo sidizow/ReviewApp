@@ -14,7 +14,7 @@
     <string name="field_description">Описание:</string>
     <string name="field_review">Рецензии:</string>
     <string name="add_review">Добавить рецензию</string>
-    <string name="your_rating">Ваша оценка:</string>
+    <string name="your_rating">Ваша оценка: %1$s</string>
     <string name="reviewer_rating">Оценка пользователя: %1$s</string>
     <string name="exit">Выход</string>
     <string name="invalid_email_or_password_message">Неверный email или пароль</string>

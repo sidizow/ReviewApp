@@ -67,7 +67,7 @@ class RoomAccountsRepository @Inject constructor(
             .flowOn(ioDispatcher)
     }
 
-    override suspend fun getListAccount(): List<Account> = withContext(ioDispatcher){
+    override suspend fun getListAccount(): List<Account> = withContext(ioDispatcher) {
         return@withContext accountsDao.getAllAccounts().map { it.toAccount() }
     }
 
@@ -90,7 +90,9 @@ class RoomAccountsRepository @Inject constructor(
 
     private fun getAccountById(accountId: Long): Flow<Account?> {
         return accountsDao.getAccountById(accountId)
-            .map { accountDbEntity -> accountDbEntity?.toAccount() }
+            .map { accountDbEntity ->
+                accountDbEntity?.toAccount()
+            }
     }
 
 

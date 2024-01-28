@@ -25,7 +25,7 @@ class CatalogFilmsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            filmsRepository.getFlowFilms().collect{
+            filmsRepository.getListFilms().collect{
                 _listFilms.value = it
             }
         }

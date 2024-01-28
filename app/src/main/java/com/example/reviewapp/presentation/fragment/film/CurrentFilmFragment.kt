@@ -6,6 +6,7 @@ import android.view.inputmethod.EditorInfo
 import android.widget.AdapterView
 import android.widget.EditText
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.reviewapp.R
@@ -14,6 +15,7 @@ import com.example.reviewapp.model.films.entities.Film
 import com.example.reviewapp.presentation.base.BaseFragment
 import com.example.reviewapp.utils.hideKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
@@ -27,16 +29,20 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
         super.onViewCreated(view, savedInstanceState)
         val adapter = setupReview()
 
-        binding.addReview.setOnClickListener {
-            addReviewForFilm()
-        }
+        binding.addReview.setOnClickListener { addReviewForFilm() }
         enterOnBoard(binding.reviewEditText)
 
-        viewModel.currentFilm.observe(viewLifecycleOwner) { renderFilm(it) }
+        viewModel.currentFilm.observe(viewLifecycleOwner) {
+            lifecycleScope.launch { renderFilm(it) }
+        }
 
-        viewModel.listAccount.observe(viewLifecycleOwner) { adapter.setAccounts(it) }
+        viewModel.listAccount.observe(viewLifecycleOwner) {
+                adapter.setAccounts(it)
+        }
 
-        viewModel.listReviews.observe(viewLifecycleOwner) { adapter.renderReviews(it) }
+        viewModel.listReviews.observe(viewLifecycleOwner) {
+                adapter.renderReviews(it)
+        }
 
         observeState()
         selectRatingFilm()
@@ -65,10 +71,9 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
                 id: Long,
             ) {
                 val selectRating = binding.ratingSpinner.selectedItem.toString().toInt()
-                if (selectRating != 0) {
-                    viewModel.selectRatingFilm(selectRating)
-                }
+                viewModel.selectRatingFilm(selectRating)
             }
+
             override fun onNothingSelected(parent: AdapterView<*>?) {}
         }
     }
@@ -98,17 +103,11 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
         }
     }
 
-    private fun renderFilm(film: Film) {
+    private suspend fun renderFilm(film: Film) {
         binding.titleFilm.text = film.title
         binding.descriptionFilm.text = film.description
-        viewModel.summaryScore.observe(viewLifecycleOwner){
-            binding.ratingFilm.text = it.toString()
-        }
-        viewModel.rating.observe(viewLifecycleOwner) {
-            if (it != null) {
-                binding.ratingSpinner.setSelection(it)
-            }
-        }
+        binding.ratingFilm.text = film.summaryScore.toString()
+
         if (film.img.isNotBlank()) {
             Glide.with(binding.filmAvatar.context)
                 .load(film.img)
@@ -117,6 +116,14 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
                 .into(binding.filmAvatar)
         } else {
             binding.filmAvatar.setImageResource(R.drawable.ic_not_found_avatar_film)
+        }
+
+        viewModel.rating.collect {
+            if (it?.rating != null){
+                binding.fieldURating.text = getString(R.string.your_rating, it.rating.toString())
+            }else {
+                binding.fieldURating.text = getString(R.string.your_rating, "0")
+            }
         }
     }
 }
