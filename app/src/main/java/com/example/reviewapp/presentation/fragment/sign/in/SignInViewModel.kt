@@ -32,7 +32,7 @@ class SignInViewModel @Inject constructor(
     private val _navigateToCatalogFilmsEvent = MutableUnitLiveEvent()
     val navigateToCatalogFilmsEvent = _navigateToCatalogFilmsEvent.share()
 
-    fun singIn(email: String, password: String) = viewModelScope.launch{
+    fun singIn(email: String, password: CharArray) = viewModelScope.launch{
         showProgress()
         try {
             accountsRepository.signIn(email,password)

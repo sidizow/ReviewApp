@@ -1,4 +1,4 @@
-package com.example.reviewapp.model.sqlite
+package com.example.reviewapp.model.room
 
 import android.database.sqlite.SQLiteException
 import com.example.reviewapp.model.StorageException

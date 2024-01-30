@@ -11,6 +11,7 @@ import com.example.reviewapp.R
 import com.example.reviewapp.databinding.FragmentSignUpBinding
 import com.example.reviewapp.model.accounts.entities.SignUpData
 import com.example.reviewapp.presentation.base.BaseFragment
+import com.example.reviewapp.utils.toCharArray
 import com.google.android.material.textfield.TextInputLayout
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -67,8 +68,8 @@ class SignUpFragment : BaseFragment<FragmentSignUpBinding>(
         val singUpData = SignUpData(
             email = binding.emailEditText.text.toString(),
             username = binding.usernameEditText.text.toString(),
-            password = binding.passwordEditText.text.toString(),
-            repeatPassword = binding.repeatPasswordEditText.text.toString()
+            password = binding.passwordEditText.text.toCharArray(),
+            repeatPassword = binding.repeatPasswordEditText.text.toCharArray()
         )
         viewModel.signUp(singUpData)
     }

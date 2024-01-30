@@ -8,6 +8,7 @@ import androidx.navigation.fragment.findNavController
 import com.example.reviewapp.R
 import com.example.reviewapp.databinding.FragmentSignInBinding
 import com.example.reviewapp.presentation.base.BaseFragment
+import com.example.reviewapp.utils.toCharArray
 import dagger.hilt.android.AndroidEntryPoint
 
 
@@ -67,16 +68,13 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(
     private fun onSignInButtonPressed() {
         viewModel.singIn(
             email = binding.emailEditText.text.toString(),
-            password = binding.passwordEditText.text.toString()
+            password = binding.passwordEditText.text.toCharArray()
         )
     }
 
     private fun onSignUpButtonPressed() {
         val email = binding.emailEditText.text.toString()
-        val emailArg = if (email.isBlank())
-            null
-        else
-            email
+        val emailArg = email.ifBlank { null }
         val direction = SignInFragmentDirections.actionSignInFragmentToSignUpFragment(emailArg)
         findNavController().navigate(direction)
     }

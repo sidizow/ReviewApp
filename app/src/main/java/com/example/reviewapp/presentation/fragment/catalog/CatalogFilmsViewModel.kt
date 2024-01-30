@@ -25,14 +25,14 @@ class CatalogFilmsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            filmsRepository.getFlowFilms().collect{
+            filmsRepository.getListFilms().collect{
                 _listFilms.value = it
             }
         }
     }
 
-    override fun onOpenFilmPage(idFilm: Long) {
-        _openFilmPageEvent.publishEvent(idFilm)
+    override fun onOpenFilmPage(filmId: Long) {
+        _openFilmPageEvent.publishEvent(filmId)
     }
 
 }
