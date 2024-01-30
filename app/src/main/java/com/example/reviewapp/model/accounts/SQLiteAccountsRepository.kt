@@ -19,6 +19,7 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.withContext
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -126,9 +127,9 @@ class SQLiteAccountsRepository @Inject constructor(
             .flowOn(ioDispatcher)
     }
 
-    override suspend fun getListAccount(): List<Account> {
+    override suspend fun getListAccount(): List<Account> = withContext(ioDispatcher) {
         val cursor = db.rawQuery("SELECT * FROM ${AccountsTable.TABLE_NAME}", null)
-        return cursor.use {
+        return@withContext cursor.use {
             val list = mutableListOf<Account>()
             while (cursor.moveToNext()) {
                 list.add(parseAccount(cursor))
