@@ -23,7 +23,7 @@ class RoomModule {
         return Room.databaseBuilder(
             appContext,
             AppDatabase::class.java, "reviews.db"
-        ).createFromAsset("initial_db.db").build()
+        ).createFromAsset("initial.db").build()
     }
 
     @Provides

@@ -23,5 +23,4 @@ data class FilmDbEntity(
         img = img
     )
 
-
 }

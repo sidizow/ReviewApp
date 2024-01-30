@@ -71,7 +71,9 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
                 id: Long,
             ) {
                 val selectRating = binding.ratingSpinner.selectedItem.toString().toInt()
-                viewModel.selectRatingFilm(selectRating)
+                if (selectRating != 0) {
+                    viewModel.selectRatingFilm(selectRating)
+                }
             }
 
             override fun onNothingSelected(parent: AdapterView<*>?) {}
@@ -117,9 +119,9 @@ class CurrentFilmFragment : BaseFragment<FragmentCurrentFilmBinding>(
         } else {
             binding.filmAvatar.setImageResource(R.drawable.ic_not_found_avatar_film)
         }
-
         viewModel.rating.collect {
             if (it?.rating != null){
+                binding.ratingSpinner.setSelection(it.rating!!)
                 binding.fieldURating.text = getString(R.string.your_rating, it.rating.toString())
             }else {
                 binding.fieldURating.text = getString(R.string.your_rating, "0")

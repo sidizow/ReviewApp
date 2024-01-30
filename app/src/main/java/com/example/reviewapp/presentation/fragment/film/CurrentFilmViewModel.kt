@@ -54,16 +54,17 @@ class CurrentFilmViewModel @Inject constructor(
     init {
         viewModelScope.launch {
             _listAccount.value = accountsRepository.getListAccount()
+            filmsRepository.getFilmById(filmId).collect {
+                _currentFilm.value = it
+            }
+        }
+        viewModelScope.launch {
 
             rating = combine(
                 accountsRepository.getAccount(),
                 reviewsRepository.getReviewsByFilmId(filmId)
             ) { account, reviews ->
                 reviews.firstOrNull { it.accountId == account?.id }
-            }
-
-            filmsRepository.getFilmById(filmId).collect {
-                _currentFilm.value = it
             }
         }
         viewModelScope.launch {
