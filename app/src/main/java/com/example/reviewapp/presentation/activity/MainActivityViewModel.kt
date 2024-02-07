@@ -3,17 +3,21 @@ package com.example.reviewapp.presentation.activity
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.example.reviewapp.model.accounts.AccountsRepository
-import com.example.reviewapp.utils.MutableLiveEvent
-import com.example.reviewapp.utils.publishEvent
-import com.example.reviewapp.utils.share
+import com.example.reviewapp.accountfeature.domain.usecases.GetAccountUseCase
+import com.example.reviewapp.accountfeature.domain.usecases.IsSignedInUseCase
+import com.example.reviewapp.accountfeature.domain.usecases.LogoutUseCase
+import com.example.reviewapp.core.utils.MutableLiveEvent
+import com.example.reviewapp.core.utils.publishEvent
+import com.example.reviewapp.core.utils.share
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 @HiltViewModel
 class MainActivityViewModel @Inject constructor(
-    private val accountsRepository: AccountsRepository,
+    private val isSignedInUseCase: IsSignedInUseCase,
+    private val getAccountUseCase: GetAccountUseCase,
+    private val logoutUseCase: LogoutUseCase
 ) : ViewModel() {
 
     private val _username = MutableLiveData<String>()
@@ -27,8 +31,8 @@ class MainActivityViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            _launchMainScreenEvent.publishEvent(accountsRepository.isSignedIn())
-            accountsRepository.getAccount().collect {
+            _launchMainScreenEvent.publishEvent(isSignedInUseCase.isSignedIn())
+            getAccountUseCase.getAccount().collect {
                 if (it == null) {
                     _username.value = ""
                 } else {
@@ -39,7 +43,7 @@ class MainActivityViewModel @Inject constructor(
     }
 
     fun logout() = viewModelScope.launch {
-        accountsRepository.logout()
+        logoutUseCase.logout()
         restartAppFromLoginScreen()
     }
     private fun restartAppFromLoginScreen() {

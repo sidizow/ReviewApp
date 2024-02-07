@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/signInFragment"
-        android:name="com.example.reviewapp.presentation.fragment.sign.in.SignInFragment"
+        android:name="com.example.reviewapp.accountfeature.presentation.sign.in.SignInFragment"
         android:label="fragment_sign_in"
         tools:layout="@layout/fragment_sign_in" >
         <action
@@ -19,7 +19,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="com.example.reviewapp.presentation.fragment.sign.up.SignUpFragment"
+        android:name="com.example.reviewapp.accountfeature.presentation.sign.up.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action
@@ -32,7 +32,7 @@
     </fragment>
     <fragment
         android:id="@+id/catalogFilmsFragment"
-        android:name="com.example.reviewapp.presentation.fragment.catalog.CatalogFilmsFragment"
+        android:name="com.example.reviewapp.catalogfilmsfeature.presentation.CatalogFilmsFragment"
         android:label="fragment_catalog_films"
         tools:layout="@layout/fragment_catalog_films" >
         <action
@@ -41,7 +41,7 @@
     </fragment>
     <fragment
         android:id="@+id/currentFilmFragment"
-        android:name="com.example.reviewapp.presentation.fragment.film.CurrentFilmFragment"
+        android:name="com.example.reviewapp.filmfeature.presentation.CurrentFilmFragment"
         android:label="fragment_current_film"
         tools:layout="@layout/fragment_current_film" >
         <argument

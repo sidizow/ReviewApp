@@ -2,10 +2,10 @@ package com.example.reviewapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.reviewapp.model.accounts.room.AccountsDao
-import com.example.reviewapp.model.films.room.FilmsDao
-import com.example.reviewapp.model.reviews.room.ReviewsDao
-import com.example.reviewapp.model.room.AppDatabase
+import com.example.reviewapp.data.datasources.room.accounts.AccountsDao
+import com.example.reviewapp.data.datasources.room.catalog.FilmsDao
+import com.example.reviewapp.data.datasources.room.reviews.ReviewsDao
+import com.example.reviewapp.data.datasources.room.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

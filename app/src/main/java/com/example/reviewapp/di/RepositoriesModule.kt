@@ -1,11 +1,11 @@
 package com.example.reviewapp.di
 
-import com.example.reviewapp.model.accounts.AccountsRepository
-import com.example.reviewapp.model.accounts.room.RoomAccountsRepository
-import com.example.reviewapp.model.films.FilmsRepository
-import com.example.reviewapp.model.films.room.RoomFilmsRepository
-import com.example.reviewapp.model.reviews.ReviewsRepository
-import com.example.reviewapp.model.reviews.room.RoomReviewsRepository
+import com.example.reviewapp.accountfeature.domain.repositories.AccountsRepository
+import com.example.reviewapp.catalogfilmsfeature.domain.repositories.FilmsRepository
+import com.example.reviewapp.data.repositories.RoomAccountsRepository
+import com.example.reviewapp.data.repositories.RoomFilmsRepository
+import com.example.reviewapp.data.repositories.RoomReviewsRepository
+import com.example.reviewapp.filmfeature.domain.repositories.ReviewsRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

@@ -8,7 +8,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
 import com.example.reviewapp.R
 import com.example.reviewapp.databinding.ActivityMainBinding
-import com.example.reviewapp.utils.observeEvent
+import com.example.reviewapp.core.utils.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint

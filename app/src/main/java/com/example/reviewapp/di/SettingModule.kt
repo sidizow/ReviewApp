@@ -1,7 +1,7 @@
 package com.example.reviewapp.di
 
-import com.example.reviewapp.model.settings.AppSettings
-import com.example.reviewapp.model.settings.SharedPreferencesAppSettings
+import com.example.reviewapp.data.datasources.sharedpref.settings.AppSettings
+import com.example.reviewapp.data.datasources.sharedpref.settings.SharedPreferencesAppSettings
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn

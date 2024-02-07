@@ -1,7 +1,7 @@
 package com.example.reviewapp.di
 
-import com.example.reviewapp.utils.security.DefaultSecurityUtilsImpl
-import com.example.reviewapp.utils.security.SecurityUtils
+import com.example.reviewapp.core.utils.security.DefaultSecurityUtilsImpl
+import com.example.reviewapp.core.utils.security.SecurityUtils
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
