@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="field_email">Email</string>
+    <string name="field_password">Password</string>
+    <string name="field_is_empty">Пустое поле</string>
+    <string name="field_username">Username</string>
+    <string name="action_create_account">Зарегистрироваться</string>
+    <string name="field_repeat_password">Repeat password</string>
+    <string name="password_missmatch">Пароли не совпадают</string>
+    <string name="account_already_exists">Учетная запись уже существует</string>
+    <string name="success_sign_up_message">Учетная запись создана!</string>
+</resources>

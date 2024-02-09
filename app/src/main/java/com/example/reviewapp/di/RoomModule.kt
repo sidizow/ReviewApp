@@ -2,10 +2,6 @@ package com.example.reviewapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.example.reviewapp.data.datasources.room.accounts.AccountsDao
-import com.example.reviewapp.data.datasources.room.catalog.FilmsDao
-import com.example.reviewapp.data.datasources.room.reviews.ReviewsDao
-import com.example.reviewapp.data.datasources.room.database.AppDatabase
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -19,28 +15,28 @@ class RoomModule {
 
     @Provides
     @Singleton
-    fun provideAppDatabase(@ApplicationContext appContext: Context): AppDatabase {
+    fun provideAppDatabase(@ApplicationContext appContext: Context): com.example.reviewapp.data.datasources.room.database.AppDatabase {
         return Room.databaseBuilder(
             appContext,
-            AppDatabase::class.java, "reviews.db"
+            com.example.reviewapp.data.datasources.room.database.AppDatabase::class.java, "reviews.db"
         ).createFromAsset("initial.db").build()
     }
 
     @Provides
     @Singleton
-    fun provideAccountDao(database: AppDatabase): AccountsDao {
+    fun provideAccountDao(database: com.example.reviewapp.data.datasources.room.database.AppDatabase): com.example.reviewapp.data.datasources.room.accounts.AccountsDao {
         return database.getAccountsDao()
     }
 
     @Provides
     @Singleton
-    fun provideFilmsDao(database: AppDatabase): FilmsDao {
+    fun provideFilmsDao(database: com.example.reviewapp.data.datasources.room.database.AppDatabase): com.example.reviewapp.data.datasources.room.catalog.FilmsDao {
         return database.getFilmsDao()
     }
 
     @Provides
     @Singleton
-    fun provideReviewsDao(database: AppDatabase): ReviewsDao {
+    fun provideReviewsDao(database: com.example.reviewapp.data.datasources.room.database.AppDatabase): com.example.reviewapp.data.datasources.room.reviews.ReviewsDao {
         return database.getReviewsDao()
     }
 

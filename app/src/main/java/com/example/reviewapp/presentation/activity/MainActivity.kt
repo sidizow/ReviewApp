@@ -6,9 +6,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navOptions
+import com.example.navigation.R.id
+import com.example.navigation.R.navigation
+import com.example.presentation.utils.observeEvent
 import com.example.reviewapp.R
 import com.example.reviewapp.databinding.ActivityMainBinding
-import com.example.reviewapp.core.utils.observeEvent
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -56,16 +58,16 @@ class MainActivity : AppCompatActivity() {
         return navHost.navController
     }
 
-    private fun getNavigationGraphId(): Int = R.navigation.nav_graph
+    private fun getNavigationGraphId(): Int = navigation.nav_graph
 
-    private fun getSignInDestination(): Int = R.id.signInFragment
+    private fun getSignInDestination(): Int = id.signInFragment
 
-    private fun getCatalogFilmsDestination(): Int = R.id.catalogFilmsFragment
+    private fun getCatalogFilmsDestination(): Int = id.catalogFilmsFragment
 
     private fun observeRestartAppFromLoginScreenEvent() {
         viewModel.restartWithSignInEvent.observeEvent(this) {
-            getNavController().navigate(R.id.signInFragment, null, navOptions {
-                popUpTo(R.id.catalogFilmsFragment) {
+            getNavController().navigate(id.signInFragment, null, navOptions {
+                popUpTo(id.catalogFilmsFragment) {
                     inclusive = true
                 }
             })

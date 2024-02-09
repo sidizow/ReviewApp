@@ -1,6 +1,9 @@
 plugins {
     id("com.android.library")
     id("org.jetbrains.kotlin.android")
+    kotlin("kapt")
+    id("com.google.dagger.hilt.android")
+    id("androidx.navigation.safeargs.kotlin")
 }
 
 android {
@@ -12,6 +15,12 @@ android {
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles("consumer-rules.pro")
+        kapt {
+            correctErrorTypes = true
+            arguments {
+                arg("room.schemaLocation", "$projectDir/schemas")
+            }
+        }
     }
 
     buildTypes {
@@ -34,12 +43,18 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.android.material)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext)
+    androidTestImplementation(libs.androidx.test.espresso)
 
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
+    //Room
+    implementation(libs.bundles.room)
+    kapt(libs.room.compiler)
+    //Hilt
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
+    implementation(project(":core:common"))
 }

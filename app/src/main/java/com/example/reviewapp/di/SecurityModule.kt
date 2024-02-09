@@ -1,7 +1,5 @@
 package com.example.reviewapp.di
 
-import com.example.reviewapp.core.utils.security.DefaultSecurityUtilsImpl
-import com.example.reviewapp.core.utils.security.SecurityUtils
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -13,7 +11,7 @@ abstract class SecurityModule {
 
     @Binds
     abstract fun bindSecurity(
-        defaultSecurityUtilsImpl: DefaultSecurityUtilsImpl
-    ): SecurityUtils
+        defaultSecurityUtilsImpl: com.example.presentation.utils.security.DefaultSecurityUtilsImpl
+    ): com.example.presentation.utils.security.SecurityUtils
 
 }
