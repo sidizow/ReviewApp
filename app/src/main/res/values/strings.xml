@@ -1,40 +1,8 @@
 <resources>
     <string name="app_name">ReviewApp</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="action_sign_in">Войти</string>
-    <string name="action_create_account">Зарегистрироваться</string>
-    <string name="field_email">Email</string>
-    <string name="field_password">Password</string>
-    <string name="field_username">Username</string>
-    <string name="field_repeat_password">Repeat password</string>
-    <string name="title_film">The Shawshank Redemption</string>
-    <string name="description_film">Бухгалтер Энди Дюфрейн обвинён в убийстве собственной жены и её любовника. Оказавшись в тюрьме под названием Шоушенк, он сталкивается с жестокостью и беззаконием, царящими по обе стороны решётки. Каждый, кто попадает в эти стены, становится их рабом до конца жизни. Но Энди, обладающий живым умом и доброй душой, находит подход как к заключённым, так и к охранникам, добиваясь их особого к себе расположения.</string>
-    <string name="review_film">«Побег из Шоушенка» - экранизация романа Стивена Кинга. На мой взгляд, это редчайший случай, когда фильм превзошел литературное произведение, по которому он был создан. И, несмотря на то, что ставить картину по книге всегда сложно, это тот пример, когда фильм не только прекрасно передал на экране всю глубину, атмосферу и смысловой стержень замечательной книги Кинга, но и оказался сильнее, превзойдя оригинал.</string>
-    <string name="field_description">Описание:</string>
-    <string name="field_review">Рецензии:</string>
-    <string name="add_review">Добавить рецензию</string>
-    <string name="your_rating">Ваша оценка: %1$s</string>
-    <string name="reviewer_rating">Оценка пользователя: %1$s</string>
     <string name="exit">Выход</string>
-    <string name="invalid_email_or_password_message">Неверный email или пароль</string>
-    <string name="field_is_empty">Пустое поле</string>
-    <string name="password_missmatch">Пароли не совпадают</string>
-    <string name="account_already_exists">Учетная запись уже существует</string>
-    <string name="success_sign_up_message">Учетная запись создана!</string>
-    <string name="your_review">Ваша рецензия</string>
 
-    <string-array name="score_array">
-        <item>0</item>
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
-        <item>6</item>
-        <item>7</item>
-        <item>8</item>
-        <item>9</item>
-        <item>10</item>
-    </string-array>
+
+
+
 </resources>

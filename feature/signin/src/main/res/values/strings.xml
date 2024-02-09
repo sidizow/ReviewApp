@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="field_email">Email</string>
+    <string name="field_password">Password</string>
+    <string name="action_sign_in">Войти</string>
+    <string name="action_create_account">Зарегистрироваться</string>
+    <string name="field_is_empty">Пустое поле</string>
+    <string name="invalid_email_or_password_message">Неверный email или пароль</string>
+</resources>

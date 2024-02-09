@@ -49,42 +49,42 @@ android {
 }
 
 dependencies {
-    val hiltVersion = "2.50"
-    val roomVersion = "2.6.1"
-    val navCompVersion = "2.7.6"
-    val coroutinesVersion = "1.7.1"
 
+    implementation(libs.androidx.core)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.android.material)
+    implementation(libs.androidx.constraintlayout)
+    testImplementation(libs.junit)
+    androidTestImplementation(libs.androidx.test.ext)
+    androidTestImplementation(libs.androidx.test.espresso)
 
-    implementation("androidx.core:core-ktx:1.12.0")
-    implementation("androidx.appcompat:appcompat:1.6.1")
-    implementation("com.google.android.material:material:1.11.0")
-    implementation("androidx.constraintlayout:constraintlayout:2.1.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-
-    implementation("androidx.activity:activity-ktx:1.8.2")
-    implementation("androidx.fragment:fragment-ktx:1.6.2")
-    implementation("androidx.recyclerview:recyclerview:1.3.2")
+    implementation(libs.bundles.activity.fragment)
+    implementation(libs.androidx.recyclerview)
 
     //Hilt
-    implementation("com.google.dagger:hilt-android:$hiltVersion")
-    kapt("com.google.dagger:hilt-android-compiler:$hiltVersion")
+    implementation(libs.hilt.android)
+    kapt(libs.hilt.compiler)
 
     //Jetpack's navigation component
-    implementation("androidx.navigation:navigation-fragment-ktx:$navCompVersion")
-    implementation("androidx.navigation:navigation-ui-ktx:$navCompVersion")
+    implementation(libs.bundles.navigation)
 
     //Coroutines
-    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-android:$coroutinesVersion")
+    implementation(libs.coroutines)
 
     //Glide
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation(libs.glide)
 
     //Room
-    implementation("androidx.room:room-runtime:$roomVersion")
-    kapt("androidx.room:room-compiler:$roomVersion")
-    implementation("androidx.room:room-ktx:$roomVersion")
+    implementation(libs.bundles.room)
+    kapt(libs.room.compiler)
+
+    implementation(project(":data"))
+    implementation(project(":feature:catalog"))
+    implementation(project(":feature:film"))
+    implementation(project(":feature:signin"))
+    implementation(project(":feature:signup"))
+    implementation(project(":core:common"))
+    implementation(project(":navigation"))
 
 }
 

@@ -1,11 +1,17 @@
 package com.example.reviewapp.di
 
-import com.example.reviewapp.model.accounts.AccountsRepository
-import com.example.reviewapp.model.accounts.room.RoomAccountsRepository
-import com.example.reviewapp.model.films.FilmsRepository
-import com.example.reviewapp.model.films.room.RoomFilmsRepository
-import com.example.reviewapp.model.reviews.ReviewsRepository
-import com.example.reviewapp.model.reviews.room.RoomReviewsRepository
+import com.example.catalog.domain.repositories.CatalogRepository
+import com.example.film.domain.repositories.AccountRepository
+import com.example.film.domain.repositories.FilmRepository
+import com.example.film.domain.repositories.ReviewsRepository
+import com.example.reviewapp.glue.catalog.AdapterCatalogRepository
+import com.example.reviewapp.glue.film.AdapterAccountRepository
+import com.example.reviewapp.glue.film.AdapterFilmRepository
+import com.example.reviewapp.glue.film.AdapterReviewsRepository
+import com.example.reviewapp.glue.signin.AdapterSignInRepository
+import com.example.reviewapp.glue.signup.AdapterSignUpRepository
+import com.example.signin.domain.repositories.SignInRepository
+import com.example.signup.domain.repositories.SignUpRepository
 import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
@@ -16,17 +22,33 @@ import dagger.hilt.components.SingletonComponent
 abstract class RepositoriesModule {
 
     @Binds
-    abstract fun bindAccountRepository(
-        roomAccountsRepository: RoomAccountsRepository
-    ): AccountsRepository
+    abstract fun bindAdapterSignInRepository(
+        adapterSignInRepository: AdapterSignInRepository
+    ): SignInRepository
 
     @Binds
-    abstract fun bindFilmRepository(
-        roomFilmsRepository: RoomFilmsRepository
-    ): FilmsRepository
+    abstract fun bindAdapterCatalogRepository(
+        adapterCatalogRepository: AdapterCatalogRepository
+    ): CatalogRepository
 
     @Binds
-    abstract fun bindReviewRepository(
-        roomReviewsRepository: RoomReviewsRepository
+    abstract fun bindAdapterReviewRepository(
+        adapterReviewsRepository: AdapterReviewsRepository
     ): ReviewsRepository
+
+    @Binds
+    abstract fun bindAdapterFilmRepository(
+        adapterFilmRepository: AdapterFilmRepository
+    ):FilmRepository
+
+    @Binds
+    abstract fun bindAdapterAccountRepository(
+        adapterAccountRepository: AdapterAccountRepository
+    ):AccountRepository
+
+    @Binds
+    abstract fun bindAdapterSignUpRepository(
+        adapterSignUpRepository: AdapterSignUpRepository
+    ): SignUpRepository
+
 }
